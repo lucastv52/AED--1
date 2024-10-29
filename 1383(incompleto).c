@@ -49,20 +49,29 @@ int verificar(int matriz[9][9]){
     return correto;
 }
 int main(void){
-    //Inicializando a matriz do sudoku
-    int sudoku[9][9];
-    for(int i=0; i<9;i++){
-        for(int j =0;j<9;j++){
-            scanf("%d",&sudoku[i][j]);
+    int k;
+    scanf("%d",&k);
+    int tabelas[k][9][9];
+    for(int m = 0;m<k;m++ ){
+        for(int i=0; i<9;i++){
+            for(int j =0;j<9;j++){
+                scanf("%d",&tabelas[m][i][j]);
+            }
         }
-    }
-    //verificar cada matriz em si
-    int result;
-    result = verificar(sudoku);
-    if(result == 1){
-        printf("SIM");
+    
+
+    if(verificar(tabelas[m])==1){
+        printf("Instancia %d\n",m+1);
+        printf("SIM\n");
+        printf("\n");
     }
     else{
-        printf("NAO");
+        printf("Instancia %d\n",m+1);
+        printf("NAO\n");
+        printf("\n");
     }
+
+    }
+
+    
 }
