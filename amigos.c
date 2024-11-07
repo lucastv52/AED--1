@@ -11,12 +11,14 @@ struct cel{
 };
 typedef struct cel celula;
 
-void inserir(char y[], celula *p, int size){
+void inserir(char y[], celula *p){
+    int size = strlen(y);
     celula *nova;
     nova = malloc(sizeof(celula));
     for (int i=0; i<size; i++) {
         nova->name[i] = y[i];
     }
+    nova->name[size] = '\0';
     nova->seg = p->seg;
     p->seg = nova;
 }
@@ -24,19 +26,42 @@ void inserir(char y[], celula *p, int size){
 
 void Imprima (celula *lst) {
     celula *p;
-    for (p = lst; p != NULL; p = p->seg)
+    for (p = lst->seg; p != NULL; p = p->seg)
     printf ("%s\n", p->name);
 }
 
 
+celula *buscaAnterior(char x[],  celula *lst){
+    celula *p;
+    p = lst->seg;
+    while (p != NULL && strcmp(p->name, x)==0){
+        if(strcmp(p->name, x) != 0){
+            p = p->seg;
+        }else{
+            return p;
+        }
+    }
+    return p;
+}
+
+
 int main(){
-    celula *amigo1 = malloc(sizeof(celula));
-    celula *amigo2 = malloc(sizeof(celula));
-    strcpy(amigo1->name,"lucas");
-    strcpy(amigo2->name, "joao");
-    amigo1->seg = amigo2;
-    amigo2->seg = NULL;
+    //inicializando cabeça da lista
+    celula *cabeca = malloc(sizeof(celula));
+    strcpy(cabeca->name,"teste");
+    cabeca->seg = NULL;
     
+    char *nome;
+    char entrada[128];
+    gets(entrada);
+
+    nome = strtok(entrada, " ");
+    celula *prox = cabeca;
+    while(nome !=NULL){
+        inserir(nome, prox);
+        nome = strtok(NULL, " ");
+        prox = prox->seg;
+    }
     
     return 0;
 }
