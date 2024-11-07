@@ -22,7 +22,17 @@ void inserir(char y[], celula *p){
     nova->seg = p->seg;
     p->seg = nova;
 }
-
+void inserirDepois(char y[], celula *p){
+    int size = strlen(y);
+    celula *nova;
+    nova = malloc(sizeof(celula));
+    for (int i=0; i<size; i++) {
+        nova->name[i] = y[i];
+    }
+    nova->name[size] = '\0';
+    nova->seg = p->seg;
+    p->seg = nova;
+}
 
 void Imprima (celula *lst) {
     celula *p;
@@ -47,10 +57,10 @@ celula *buscaAnterior(char x[],  celula *lst){
 celula *buscaUltimo(celula *lst){
     celula *p;
     p = lst->seg;
-    if(p->seg == NULL)
-        return p;
-    else
+    while (p->seg != NULL) {
         p = p->seg;
+    }
+    return p;
 }
 
 
@@ -96,5 +106,6 @@ int main(){
         }
     }
     Imprima(cabeca);
+    printf("\n");
     return 0;
 }
