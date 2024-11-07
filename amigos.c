@@ -27,7 +27,7 @@ void inserir(char y[], celula *p){
 void Imprima (celula *lst) {
     celula *p;
     for (p = lst->seg; p != NULL; p = p->seg)
-    printf ("%s\n", p->name);
+    printf ("%s ", p->name);
 }
 
 
@@ -35,13 +35,22 @@ celula *buscaAnterior(char x[],  celula *lst){
     celula *p;
     p = lst->seg;
     while (p != NULL && strcmp(p->name, x)==0){
-        if(strcmp(p->name, x) != 0){
-            p = p->seg;
-        }else{
+        if(strcmp(p->name, x) == 0){
             return p;
+        }else{
+            p = p->seg;
         }
     }
     return p;
+}
+
+celula *buscaUltimo(celula *lst){
+    celula *p;
+    p = lst->seg;
+    if(p->seg == NULL)
+        return p;
+    else
+        p = p->seg;
 }
 
 
@@ -62,6 +71,30 @@ int main(){
         nome = strtok(NULL, " ");
         prox = prox->seg;
     }
+    char entrada2[128];
+    gets(entrada2);
     
+    char entrada3[10];
+    scanf("%s", &entrada3);
+    
+
+    if(strcmp(entrada3, "nao") !=0 ){
+        celula *anterior = buscaAnterior(entrada3, cabeca);
+        nome = strtok(entrada2, " ");
+        while(nome !=NULL){
+            inserir(nome, anterior);
+            nome = strtok(NULL, " ");
+            anterior = anterior->seg;
+        }
+    }else{
+        celula *ultimo = buscaUltimo(cabeca);
+        nome = strtok(entrada2, " ");
+        while(nome !=NULL){
+            inserir(nome, ultimo);
+            nome = strtok(NULL, " ");
+            ultimo = ultimo->seg;
+        }
+    }
+    Imprima(cabeca);
     return 0;
 }
