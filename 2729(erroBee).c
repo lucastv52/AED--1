@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define maxSize 15
+
+
 
 struct cel{
     char name[maxSize];
@@ -60,6 +63,7 @@ celula *Busca (char x[15], celula *lst) {
 }
 
 int main(){
+    fflush(stdin);
     celula *cabeca = malloc(sizeof(celula));
     strcpy(cabeca->name,"cabeca");
     cabeca->seg = NULL;
@@ -75,7 +79,7 @@ int main(){
         celula *prox = cabeca;
         while(item !=NULL){
             if(in(item,prox) == 0){       
-                inserirFinal(item, cabeca);                                 
+                inserirFinal(item, cabeca);                               
             }
             item = strtok(NULL, " ");   
         }
@@ -87,6 +91,8 @@ int main(){
             cabeca->seg = temp->seg;
             free(temp);
         }
-    }    
+    }
+
+    free(cabeca);  
     return 0;
 }
