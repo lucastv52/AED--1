@@ -1,5 +1,5 @@
 //Este código corresponde ao exercicio 3160 do beecrowd, ele tem como função utilizar uma lista encadeada para criar uma lista de amigos.
-
+//Lucas Tosetti de Vasconcellos RA 176577
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
