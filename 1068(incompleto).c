@@ -34,12 +34,12 @@ void limpa_pilha(celula *p) {
 }
 
 int main(){
-    int loop = 1;
+    
     celula *cabeca = malloc(sizeof(celula));
     cabeca->seg = NULL;
 
-    char entrada[100];
-    while(loop ==1){
+    char entrada[1000];
+    while(fgets(entrada, sizeof(entrada), stdin)!=NULL){
         gets(entrada);
         int correto =1;
         for(int i=0; entrada[i] != '\0';i ++ ){
@@ -55,7 +55,7 @@ int main(){
                 }
             }
         }
-        if(correto ==1){
+        if(correto && cabeca->seg ==NULL){
             printf("correct\n");                 
         }else{
             printf("incorrect\n");
