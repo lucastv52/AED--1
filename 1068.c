@@ -1,5 +1,5 @@
 // exercicio 1068 do beecrowd, pilha e parênteses
-
+//Lucas Tosetti de Vasconcellos RA:176577
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -40,14 +40,14 @@ int main(){
 
     char entrada[1000];
     while(fgets(entrada, sizeof(entrada), stdin)!=NULL){
-        gets(entrada);
+        
         int correto =1;
         for(int i=0; entrada[i] != '\0';i ++ ){
             celula *atual = cabeca->seg;
             if(entrada[i] == '('){
                 inserir(entrada[i],cabeca);
             }else if(entrada[i] == ')'){
-                if(cabeca->seg != NULL && cabeca->seg->termo == '('){
+                if(cabeca->seg != NULL && (atual->termo == '(')){
                     Remove(cabeca);
                 }else{
                     correto =0;
