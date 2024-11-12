@@ -27,6 +27,12 @@ void Remove (celula *p) {
     free (lixo);
 }
 
+void limpa_pilha(celula *p) {
+    while (p->seg != NULL) {
+        Remove(p);
+    }
+}
+
 int main(){
     int loop = 1;
     celula *cabeca = malloc(sizeof(celula));
@@ -35,24 +41,27 @@ int main(){
     char entrada[100];
     while(loop ==1){
         gets(entrada);
-        
-        for(int i=0; entrada[i] != "\0";i ++ ){
+        int correto =1;
+        for(int i=0; entrada[i] != '\0';i ++ ){
             celula *atual = cabeca->seg;
-            if(entrada[i] == "("){
+            if(entrada[i] == '('){
                 inserir(entrada[i],cabeca);
-            }else if(entrada[i] == ")"){
-                if(atual->termo == "("){
-                    Remove(atual);
+            }else if(entrada[i] == ')'){
+                if(cabeca->seg != NULL && cabeca->seg->termo == '('){
+                    Remove(cabeca);
                 }else{
-                    printf("incorrect\n");
+                    correto =0;
                     break;
                 }
             }
         }
-        if(cabeca->seg == NULL){
+        if(correto ==1){
             printf("correct\n");                 
+        }else{
+            printf("incorrect\n");
         }
+        limpa_pilha(cabeca);
     }
-
+    free(cabeca);
     return 0;
 }
