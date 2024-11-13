@@ -63,7 +63,8 @@ int main(){
                 }
             }           
         }
-        printf("%d\n", diamantes);         
+        printf("%d\n", diamantes);  
+        limpa_pilha(cabeca);       
     }
     return 0;
 }
