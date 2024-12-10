@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h> //clock(), CLOCKS_PER_SEC e clock_t
 
-int const TAM = 200000; //constante para tamanho do vetor
+int const TAM = 400000; //constante para tamanho do vetor
 
 void inserionSort(int v[], int n){
     int i, j, termoEsquerda;
@@ -42,6 +42,29 @@ void mergeSort (int v[],int esq, int dir ) {
     }
 }
 
+int separar (int esq, int dir, int v[]) {
+    int c, j, k, t;
+    c = v[dir]; j = esq;
+    for (k = esq; /*A*/ k < dir; k++)
+        if (v[k] <= c) {
+        t = v[j];
+        v[j] = v[k];
+        v[k] = t;
+        j++;
+        }
+    v[dir] = v[j], v[j] = c;
+    return j;
+    }
+
+void quicksort (int esq, int dir, int v[]) {
+    int j;
+    if (esq < dir) {
+        j = separar (esq, dir, v);
+        quicksort (esq, j - 1, v);
+        quicksort (j + 1, dir, v);
+    }
+}
+
 
 int main(){
     clock_t t; //variável para armazenar tempo
@@ -51,17 +74,22 @@ int main(){
     srand((unsigned)time(NULL));
 
     //geração aleatório dos valores do vetor
-    for(int a = 0; a < TAM; a++)
-        vetor[a] = rand() % TAM;
-
-    //Verificando tempo de execução do bubble sort=> t2
-    t = clock(); //armazena tempo
-    inserionSort(vetor, TAM);
-    t = clock() - t; //tempo final - tempo 
-
-    //imprime o tempo na tela
-    printf("%d\n", TAM);
-    printf("Tempo de execucao: %lf s\n", (((double)t)/((CLOCKS_PER_SEC/1000)))); //conversão para double
+    int i, j, tam;
+    tam = 20000;
+    for(i = 0; i<20; i++){
+        for(int a = 0; a < tam; a++)
+            vetor[a] = rand() % tam;    
+        
+        t = clock(); //armazena tempo
+        quicksort(0, tam, vetor);
+        t = clock() - t; //tempo final - tempo 
+        
+        printf("%d ", tam);
+        printf("Tempo de execucao: %lf s\n", (((double)t)/((CLOCKS_PER_SEC/1000))/1000)); //conversão para double
+        tam += 20000;
+    }
+    
+    
 
     return 0;
 }
